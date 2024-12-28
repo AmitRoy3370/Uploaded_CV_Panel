@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel</title>
+    <link rel="stylesheet" href="styles.css"> <!-- Include your CSS if needed -->
+</head>
+<body>
+<h1>Uploaded CVs</h1>
+<table id="cv-list">
+    <thead>
+    <tr>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Download</th>
+    </tr>
+    </thead>
+    <tbody>
+    <!-- CVs will be populated here -->
+    </tbody>
+</table>
+
+<script>
+    fetch('/admin')
+        .then(response => response.json())
+        .then(data => {
+            const cvList = document.getElementById('cv-list').getElementsByTagName('tbody')[0];
+            data.forEach(cv => {
+                const row = cvList.insertRow(); // Create a new row
+                const nameCell = row.insertCell(0);
+                const emailCell = row.insertCell(1);
+                const downloadCell = row.insertCell(2);
+
+                nameCell.textContent = cv.name; // Set name
+                emailCell.textContent = cv.email; // Set email
+
+                // Set download link
+                const downloadLink = document.createElement('a');
+                downloadLink.href = `/download/${cv.id}`;
+                downloadLink.textContent = 'Download';
+                downloadCell.appendChild(downloadLink); // Append link to cell
+            });
+        })
+        .catch(error => {
+            console.error('Error fetching CVs:', error);
+        });
+</script>
+</body>
+</html>
