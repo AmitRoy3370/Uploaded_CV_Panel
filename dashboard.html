@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        .header {
+            background-color: #333;
+            color: #fff;
+            padding: 10px 0;
+            text-align: center;
+        }
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 20px;
+        }
+        .profile {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .profile img {
+            border-radius: 50%;
+            width: 100px;
+            height: 100px;
+        }
+        .profile h2 {
+            margin: 10px 0 0;
+        }
+        .data {
+            width: 80%;
+            background-color: #fff;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .data h3 {
+            margin-top: 0;
+        }
+        .data p {
+            margin: 5px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Admin Dashboard</h1>
+    </div>
+    <div class="container">
+        <div class="profile">
+            <img src="profile-pic.jpg" alt="Profile Picture">
+            <h2 id="admin-name">Admin Name</h2>
+        </div>
+        <div class="data">
+            <h3>Basic Data</h3>
+            <p id="data1">Data 1: Loading...</p>
+            <p id="data2">Data 2: Loading...</p>
+            <p id="data3">Data 3: Loading...</p>
+        </div>
+    </div>
+    <script>
+        document.getElementById('admin-name').innerText = 'John Doe';
+        document.getElementById('data1').innerText = 'Data 1: 123';
+        document.getElementById('data2').innerText = 'Data 2: 456';
+        document.getElementById('data3').innerText = 'Data 3: 789';
+    </script>
+</body>
+</html>
+<style>
+    .sidebar {
+        height: 100%;
+        width: 200px;
+        position: fixed;
+        top: 0;
+        left: 0;
+        background-color: #333;
+        padding-top: 20px;
+    }
+    .sidebar a {
+        padding: 10px 15px;
+        text-decoration: none;
+        font-size: 18px;
+        color: white;
+        display: block;
+    }
+    .sidebar a:hover {
+        background-color: #575757;
+    }
+    .container {
+        margin-left: 220px; /* Same as the width of the sidebar */
+        padding: 20px;
+    }
+</style>
+<div class="sidebar">
+    <a href="./dashboard.html">Dashboard</a>
+    <a href="./index.html">Users</a>
+    <a href="./settings.html">Settings</a>
+    <a href="./login.html">Logout</a>
+</div>

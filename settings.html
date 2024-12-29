@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Settings</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            width: 80%;
+            margin: auto;
+            overflow: hidden;
+        }
+        header {
+            background: #333;
+            color: #fff;
+            padding-top: 30px;
+            min-height: 70px;
+            border-bottom: #77aaff 3px solid;
+        }
+        header a {
+            color: #fff;
+            text-decoration: none;
+            text-transform: uppercase;
+            font-size: 16px;
+        }
+        .settings-form {
+            background: #fff;
+            padding: 20px;
+            margin-top: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .settings-form h2 {
+            margin-bottom: 20px;
+        }
+        .settings-form label {
+            display: block;
+            margin-bottom: 10px;
+        }
+        .settings-form input[type="text"],
+        .settings-form input[type="email"],
+        .settings-form input[type="password"],
+        .settings-form input[type="file"],
+        .settings-form select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+        }
+        .settings-form button {
+            display: inline-block;
+            background: #333;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Admin Settings</h1>
+        </div>
+    </header>
+    <div class="container">
+        <form class="settings-form">
+            <h2>General Settings</h2>
+            <label for="pageColor">Page Color</label>
+            <input type="color" id="pageColor" name="pageColor">
+            
+            <label for="textSize">Text Size</label>
+            <select id="textSize" name="textSize">
+                <option value="small">Small</option>
+                <option value="medium">Medium</option>
+                <option value="large">Large</option>
+            </select>
+            
+            <label for="tableStyle">Table Style</label>
+            <select id="tableStyle" name="tableStyle">
+                <option value="striped">Striped</option>
+                <option value="bordered">Bordered</option>
+                <option value="hover">Hover</option>
+            </select>
+            
+            <h2>Admin Information</h2>
+            <label for="username">Username</label>
+            <input type="text" id="username" name="username">
+            
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email">
+            
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password">
+            
+            <label for="profilePicture">Profile Picture</label>
+            <input type="file" id="profilePicture" name="profilePicture">
+            
+            <button type="submit">Save Settings</button>
+        </form>
+    </div>
+    <script>
+        document.querySelector('.settings-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            alert('Settings saved!');
+        });
+    </script>
+</body>
+</html>
+<style>
+    .sidebar {
+        height: 100%;
+        width: 200px;
+        position: fixed;
+        top: 0;
+        left: 0;
+        background-color: #333;
+        padding-top: 20px;
+    }
+    .sidebar a {
+        padding: 10px 15px;
+        text-decoration: none;
+        font-size: 18px;
+        color: white;
+        display: block;
+    }
+    .sidebar a:hover {
+        background-color: #575757;
+    }
+    .container {
+        margin-left: 220px; /* Adjusted to make space for the sidebar */
+    }
+</style>
+<div class="sidebar">
+    <a href="./dashboard.html">Dashboard</a>
+    <a href="./index.html">Users</a>
+    <a href="./settings.html">Settings</a>
+    <a href="./login.html">Logout</a>
+</div>
