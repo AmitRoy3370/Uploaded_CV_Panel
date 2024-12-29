@@ -4,32 +4,65 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.0.3/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="main.css">
     <title>CV Upload</title>
 </head>
-<body class="bg-gray-100 flex items-center justify-center min-h-screen">
+<body class="bg-gray-100 justify-center min-h-screen">
+
+<div class="logo" style="justify-content: center; text-align: center;">
+    <img src="logo.png" alt="Logo" width="160rem" height="45rem">
+    </ul>
+</div>
+
+<div style="justify-content: center; text-align: center;">
+    <h2>AI For Future Leaders</h2>
+    <h3>Campus to Corporate</h3>
+    <h4>Upload your Resume</h4>
+    <p>Learn more about yourself</p>
+</div>
 <div class="bg-white p-8 rounded-lg shadow-md">
-    <h1 class="text-xl font-bold mb-6">আপনার সিভি আপলোড করুন</h1>
+    <h1 class="text-xl font-bold mb-6">Please upload your cv</h1>
     <form id="permission-form">
-        <p>আপনি কি আপনার সিভি আপলোড করতে চান?</p>
-        <button type="button" id="yes-button" class="mt-4 bg-blue-500 text-white px-4 py-2 rounded">হ্যাঁ</button>
-        <button type="button" id="no-button" class="mt-4 bg-red-500 text-white px-4 py-2 rounded">না</button>
+        <p>Do you want to upload your cv at her?</p>
+        <button type="button" id="yes-button" class="mt-4 bg-blue-500 text-white px-4 py-2 rounded">Yes</button>
+        <button type="button" id="no-button" class="mt-4 bg-red-500 text-white px-4 py-2 rounded">No</button>
     </form>
     <div id="upload-form" class="hidden mt-6">
-        <h2 class="text-lg font-bold">আপনার তথ্য দিন</h2>
+        <h2 class="text-lg font-bold">Give your information</h2>
         <form id="cv-form" enctype="multipart/form-data">
-            <input type="text" name="name" placeholder="নাম" required class="border p-2 w-full mb-4">
-            <input type="email" name="email" placeholder="ইমেইল" required class="border p-2 w-full mb-4">
-            <input type="file" name="cv" required class="border p-2 w-full mb-4">
-            <button type="submit" class="bg-green-500 text-white px-4 py-2 rounded">সাবমিট করুন</button>
+            <input type="text" name="name" placeholder="Name" required class="border p-2 w-full mb-4">
+            <input type="email" name="email" placeholder="Email" required class="border p-2 w-full mb-4">
+            <input type="phone" name="phone" placeholder="Phone" required class="border p-2 w-full mb-4">
+            <input type="file" name="cv" required class="border p-2 w-full mb-4" accept=".pdf,.doc,.docx" required>
+            <button type="submit" class="bg-green-500 text-white px-4 py-2 rounded">Submit</button>
         </form>
+        <br><button type="reset" class="bg-green-500 text-white px-4 py-2 rounded">Reset</button>
     </div>
+    <footer >
+        <div class="social-links" style="list-style: none;">
+            <a href="https://www.facebook.com" target="_parent">
+                <img src="fb.webp" width="30px" height="30px">
+            </a>
+            <a href="https://www.youtube.com" target="_parent">
+                <img src="Youtube.png" width="30px" height="30px">
+            </a>
+            <a href="https://www.linkedin.com" target="_parent">
+                <img src="linkedin.webp" width="30px" height="30px">
+            </a>
+            <a href="https://www.instagram.com" target="_parent">
+                <img src="insta.webp" width="30px" height="30px">
+            </a>
+        </div>
+        <p><a href="https://www.netcomlearning.com">Learn more about Netcom</a><br>&copy; 2025 Resume Drop App. All rights reserved.</p>
+
+    </footer>
 </div>
 <script>
     document.getElementById('yes-button').onclick = function() {
         document.getElementById('upload-form').classList.remove('hidden');
     };
     document.getElementById('no-button').onclick = function() {
-        alert('আপনার তথ্য সংরক্ষিত হয়নি।');
+        alert('Your data is not stored');
     };
     document.getElementById('cv-form').onsubmit = function(event) {
         event.preventDefault();
@@ -39,12 +72,13 @@
             body: formData
         }).then(response => {
             if (response.ok) {
-                alert('সিভি সফলভাবে আপলোড হয়েছে!');
+                alert('CV is uploaded successfully!');
             } else {
-                alert('আপলোড করতে সমস্যা হয়েছে।');
+                alert('Some problem to upload your cv.');
             }
         });
     };
+
 </script>
 </body>
 </html>
