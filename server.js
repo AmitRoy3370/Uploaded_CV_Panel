@@ -27,7 +27,9 @@ app.get('/', (req, res) => {
 });
 
 app.post('/upload', upload.single('cv'), (req, res) => {
-    const { name, email } = req.body;
+    const { name, email, phone } = req.body;
+
+    console.log('name :- ' + name + ' phone :- ' + phone + ' email :- ' + email);
 
     if (!req.file) {
         return res.status(400).send("No file uploaded.");
@@ -35,21 +37,46 @@ app.post('/upload', upload.single('cv'), (req, res) => {
 
     const fileData = req.file.buffer;
 
-    db.query('INSERT INTO files (name, email, file) VALUES (?, ?, ?)', [name, email, fileData], (err) => {
+    db.query('INSERT INTO files (name, email, phone, file) VALUES (?, ?, ?, ?)', [name, email, phone, fileData], (err) => {
         if (err) return res.status(500).send(err);
         res.status(200).send('File uploaded!');
     });
 });
 
 app.get('/admin', (req, res) => {
-    db.query('SELECT id, name, email FROM files', (err, results) => {
+    db.query('SELECT id, name, email, phone, created_at FROM files', (err, results) => {
         if (err) return res.status(500).send(err);
         res.json(results);
     });
 });
 
+app.get('/settings', (req, res) => {
+    res.sendFile(path.join(__dirname, 'settings.html')); // Ensure admin.html is in the same directory
+});
+
+app.get('/login', (req, res) => {
+    res.sendFile(path.join(__dirname, 'login.html')); // Ensure admin.html is in the same directory
+});
+
 app.get('/admin-panel', (req, res) => {
     res.sendFile(path.join(__dirname, 'admin.html')); // Ensure admin.html is in the same directory
+});
+
+app.get('/admin-login', (req, res) => {
+    res.sendFile(path.join(__dirname, 'login.html')); // Ensure admin.html is in the same directory
+});
+
+app.get('/dashboard', (req, res) => {
+    res.sendFile(path.join(__dirname, 'dashboard.html')); // Ensure admin.html is in the same directory
+});
+
+app.get('*', (req, res) => {
+    const knownRoutes = ['/dashboard', '/admin-panel', '/settings', '/login'];
+    if (knownRoutes.includes(req.path)) {
+        res.sendFile(path.join(__dirname, `${req.path.substring(1)}.html`)); // Serve the corresponding file
+    } else {
+        res.sendFile(path.join(__dirname, 'dashboard.html')); // Fallback to dashboard
+    }
 });
 
 app.get('/download/:id', (req, res) => {
