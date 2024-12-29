@@ -4,20 +4,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Panel</title>
-    <link rel="stylesheet" href="styles.css"> <!-- Include your CSS if needed -->
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 <h1>Uploaded CVs</h1>
 <table id="cv-list">
     <thead>
     <tr>
+        <th>Id</th>
         <th>Name</th>
         <th>Email</th>
+        <th>Phone</th>
         <th>Download</th>
+        <th>CreatedAt</th>
     </tr>
     </thead>
     <tbody>
-    <!-- CVs will be populated here -->
+
     </tbody>
 </table>
 
@@ -27,19 +30,26 @@
         .then(data => {
             const cvList = document.getElementById('cv-list').getElementsByTagName('tbody')[0];
             data.forEach(cv => {
-                const row = cvList.insertRow(); // Create a new row
-                const nameCell = row.insertCell(0);
-                const emailCell = row.insertCell(1);
-                const downloadCell = row.insertCell(2);
 
-                nameCell.textContent = cv.name; // Set name
-                emailCell.textContent = cv.email; // Set email
+                const row = cvList.insertRow();
+                const id = row.insertCell(0);
+                const nameCell = row.insertCell(1);
+                const emailCell = row.insertCell(2);
+                const phoneCell = row.insertCell(3);
+                const downloadCell = row.insertCell(4);
+                const createAtCell = row.insertCell(5);
 
-                // Set download link
+                nameCell.textContent = cv.name;
+                emailCell.textContent = cv.email;
+
+                createAtCell.textContent = cv.created_at;
+                id.textContent = cv.id;
+                phoneCell.textContent = cv.phone;
+
                 const downloadLink = document.createElement('a');
                 downloadLink.href = `/download/${cv.id}`;
                 downloadLink.textContent = 'Download';
-                downloadCell.appendChild(downloadLink); // Append link to cell
+                downloadCell.appendChild(downloadLink);
             });
         })
         .catch(error => {
