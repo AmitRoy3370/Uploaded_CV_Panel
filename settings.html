@@ -106,6 +106,19 @@
     <script>
         document.querySelector('.settings-form').addEventListener('submit', function(event) {
             event.preventDefault();
+
+            const settings = {
+                pageColor: document.getElementById('pageColor').value,
+                textSize: document.getElementById('textSize').value,
+                tableStyle: document.getElementById('tableStyle').value,
+                username: document.getElementById('username').value,
+                email: document.getElementById('email').value,
+                password: document.getElementById('password').value,
+                profilePicture: document.getElementById('profilePicture').files[0]
+            };
+
+            localStorage.setItem('adminSettings', JSON.stringify(settings));
+
             alert('Settings saved!');
         });
     </script>
@@ -132,7 +145,7 @@
         background-color: #575757;
     }
     .container {
-        margin-left: 220px; /* Adjusted to make space for the sidebar */
+        margin-left: 220px;
     }
 </style>
 <div class="sidebar">
