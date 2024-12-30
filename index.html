@@ -4,59 +4,92 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.0.3/dist/tailwind.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="main.css">
-    <title>CV Upload</title>
+    <link rel="stylesheet" href="./frontend/include/css/main.css">
+    <title>Resume Drop App</title>
+    <meta name="description" content="A web application for dropping resumes.">
+    <meta name="keywords" content="resume, job application, upload resume, job portal">
+    <meta name="author" content="Md Kamruzzaman Shishir, Md Samir Al Fayed Ifti">
+    <link rel="icon" href="./frontend/include/images/favicon.ico" type="image/x-icon">
 </head>
-<body class="bg-gray-100 justify-center min-h-screen">
+<body class="bg-gray-100 flex flex-col justify-center min-h-screen">
 
-<div class="logo" style="justify-content: center; text-align: center;">
-    <img src="logo.png" alt="Logo" width="160rem" height="45rem">
-    </ul>
-</div>
+<div class="container mx-auto">
+    <nav>
+        <div class="logo flex justify-center">
+            <img src="./frontend/img/logo.png" alt="Logo" width="160rem" height="45rem">
+        </div>
+    </nav>
 
-<div style="justify-content: center; text-align: center;">
-    <h2>AI For Future Leaders</h2>
-    <h3>Campus to Corporate</h3>
-    <h4>Upload your Resume</h4>
-    <p>Learn more about yourself</p>
-</div>
-<div class="bg-white p-8 rounded-lg shadow-md">
-    <h1 class="text-xl font-bold mb-6">Please upload your cv</h1>
-    <form id="permission-form">
-        <p>Do you want to upload your cv at her?</p>
-        <button type="button" id="yes-button" class="mt-4 bg-blue-500 text-white px-4 py-2 rounded">Yes</button>
-        <button type="button" id="no-button" class="mt-4 bg-red-500 text-white px-4 py-2 rounded">No</button>
-    </form>
-    <div id="upload-form" class="hidden mt-6">
-        <h2 class="text-lg font-bold">Give your information</h2>
-        <form id="cv-form" enctype="multipart/form-data">
-            <input type="text" name="name" placeholder="Name" required class="border p-2 w-full mb-4">
-            <input type="email" name="email" placeholder="Email" required class="border p-2 w-full mb-4">
-            <input type="phone" name="phone" placeholder="Phone" required class="border p-2 w-full mb-4">
-            <input type="file" name="cv" required class="border p-2 w-full mb-4" accept=".pdf,.doc,.docx" required>
-            <button type="submit" class="bg-green-500 text-white px-4 py-2 rounded">Submit</button>
-        </form>
-        <br><button type="reset" class="bg-green-500 text-white px-4 py-2 rounded">Reset</button>
+    <div class="text-center mt-4">
+        <h2 class="text-2xl font-semibold">AI For Future Leaders</h2>
+        <h3 class="text-xl">Campus to Corporate</h3>
+        <h4 class="text-lg">Upload your Resume</h4>
+        <p>Learn more about yourself</p>
     </div>
-    <footer >
-        <div class="social-links" style="list-style: none;">
+
+    <div class="form-container bg-white p-8 rounded-lg shadow-md mt-6">
+        <h1 class="text-xl font-bold mb-6 text-center">Please Upload Your CV</h1>
+        <form id="permission-form">
+            <p class="text-center">Do you want to upload your CV here?</p>
+            <div class="flex justify-center">
+                <button type="button" id="yes-button" class="mt-4 bg-blue-500 text-white px-4 py-2 rounded mx-2">Yes</button>
+                <button type="button" id="no-button" class="mt-4 bg-red-500 text-white px-4 py-2 rounded mx-2">No</button>
+            </div>
+        </form>
+        <div id="upload-form" class="hidden mt-6">
+            <h2 class="text-lg font-bold">Give Your Information</h2>
+            <form id="cv-form" enctype="multipart/form-data">
+                <div class="form-group mb-4">
+                    <label for="name" class="block">Name:</label>
+                    <input type="text" id="name" name="name" required class="border p-2 w-full">
+                </div>
+                <div class="form-group mb-4">
+                    <label for="email" class="block">Email:</label>
+                    <input type="email" id="email" name="email" required class="border p-2 w-full">
+                </div>
+                <div class="form-group mb-4">
+                    <label for="phone" class="block">Mobile No:</label>
+                    <input type="tel" id="phone" name="phone" required class="border p-2 w-full">
+                </div>
+                <div class="form-group mb-4">
+                    <label for="resume" class="block">Upload Resume:</label>
+                    <input type="file" id="resume" name="cv" accept=".pdf,.doc,.docx" required class="border p-2 w-full">
+                </div>
+                <div class="flex justify-evenly">
+                    <button type="submit" class="bg-green-500 text-white px-4 py-2 rounded">Submit</button>
+                    <button type="reset" class="bg-yellow-500 text-white px-4 py-2 rounded" id="reset">Reset</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="social-links text-center mt-6">
+        <a href="https://www.wa.me" target="_parent">
+            <img src="./frontend/img/whatsapp.png" width="30px" height="30px"> Join our WhatsApp group
+        </a>
+    </div>
+
+    <footer class="mt-8">
+        <div class="social-links flex justify-center" style="list-style: none; padding: 0!important;">
             <a href="https://www.facebook.com" target="_parent">
-                <img src="fb.webp" width="30px" height="30px">
+                <img src="./frontend/img/fb.webp" width="30px" height="30px">
             </a>
             <a href="https://www.youtube.com" target="_parent">
-                <img src="Youtube.png" width="30px" height="30px">
+                <img src="./frontend/img/Youtube.png" width="30px" height="30px">
             </a>
             <a href="https://www.linkedin.com" target="_parent">
-                <img src="linkedin.webp" width="30px" height="30px">
+                <img src="./frontend/img/linkedin.webp" width="30px" height="30px">
             </a>
             <a href="https://www.instagram.com" target="_parent">
-                <img src="insta.webp" width="30px" height="30px">
+                <img src="./frontend/img/insta.webp" width="30px" height="30px">
             </a>
         </div>
-        <p><a href="https://www.netcomlearning.com">Learn more about Netcom</a><br>&copy; 2025 Resume Drop App. All rights reserved.</p>
-
+        <p class="text-center mt-4">
+            <a href="https://www.netcomlearning.com">Learn more about Netcom</a><br>&copy; 2025 Resume Drop App. All rights reserved.
+        </p>
     </footer>
 </div>
+
 <script>
     document.getElementById('yes-button').onclick = function() {
         document.getElementById('upload-form').classList.remove('hidden');
@@ -74,11 +107,10 @@
             if (response.ok) {
                 alert('CV is uploaded successfully!');
             } else {
-                alert('Some problem to upload your cv.');
+                alert('Some problem occurred while uploading your CV.');
             }
         });
     };
-
 </script>
 </body>
 </html>
