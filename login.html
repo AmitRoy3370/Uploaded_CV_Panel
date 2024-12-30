@@ -67,20 +67,29 @@
         </form>
     </div>
     <script>
-        document.getElementById('loginForm').addEventListener('submit', function(event) {
-            event.preventDefault();
-            const username = document.getElementById('username').value;
-            const password = document.getElementById('password').value;
 
-            // Simple validation
-            if (username === 'admin' && password === 'admin123') {
-                alert('Login successful!');
-                // Redirect to admin panel
-                window.location.href = '/admin/dashboard.html';
-            } else {
-                alert('Invalid username or password');
-            }
-        });
+            document.getElementById('loginForm').addEventListener('submit', function (event) {
+                event.preventDefault();
+                const username = document.getElementById('username').value;
+                const password = document.getElementById('password').value;
+
+                const settings = JSON.parse(localStorage.getItem('adminSettings'));
+
+                const perfectUserName = settings.username ? settings.username : 'admin';
+                const adminPassword = settings.password ? settings.password : 'admin123';
+
+                console.log(perfectUserName + " " + adminPassword);
+
+                if (username === perfectUserName && password === adminPassword) {
+                    alert('Login successful!');
+
+                    window.location.href = '/dashboard';
+
+                } else {
+                    alert('Invalid username or password');
+                }
+            });
+
     </script>
 </body>
 </html>
