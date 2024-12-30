@@ -92,6 +92,14 @@ app.get('/download/:id', (req, res) => {
     });
 });
 
+app.delete('/admin/delete/:id', (req, res) => {
+    const id = req.params.id;
+    db.query('DELETE FROM files WHERE id = ?', [id], (err, result) => {
+        if (err) return res.status(500).send(err);
+        res.status(200).send('File deleted successfully');
+    });
+});
+
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
 });
