@@ -5,9 +5,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Panel</title>
     <link rel="stylesheet" href="styles.css">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.0.3/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="main.css">
 </head>
 <body>
-<h1>Uploaded CVs</h1>
+
+<nav>
+    <div class="logo flex justify-center">
+        <img src="logo.png" alt="Logo" width="160rem" height="45rem">
+    </div>
+</nav>
+
+<div class="text-center mt-4">
+    <h2 class="text-2xl font-semibold">AI For Future Leaders</h2>
+    <h3 class="text-xl">Campus to Corporate</h3>
+    <h4 class="text-lg">Upload your Resume</h4>
+    <p>Learn more about yourself</p>
+</div>
+
+<h1><p>Uploaded CVs</p></h1>
 <table id="cv-list">
     <thead>
     <tr>
@@ -25,61 +41,138 @@
     </tbody>
 </table>
 
+<footer class="mt-8">
+    <div class="social-links flex justify-center" style="list-style: none; padding: 0!important;">
+        <a href="https://www.facebook.com" target="_parent">
+            <img src="./frontend/img/fb.webp" width="30px" height="30px">
+        </a>
+        <a href="https://www.youtube.com" target="_parent">
+            <img src="./frontend/img/Youtube.png" width="30px" height="30px">
+        </a>
+        <a href="https://www.linkedin.com" target="_parent">
+            <img src="./frontend/img/linkedin.webp" width="30px" height="30px">
+        </a>
+        <a href="https://www.instagram.com" target="_parent">
+            <img src="./frontend/img/insta.webp" width="30px" height="30px">
+        </a>
+    </div>
+    <p class="text-center mt-4">
+        <a href="https://www.netcomlearning.com">Learn more about Netcom</a><br>&copy; 2025 Resume Drop App. All rights reserved.
+    </p>
+</footer>
+
 <script>
-    fetch('/admin')
-        .then(response => response.json())
-        .then(data => {
-            const cvList = document.getElementById('cv-list').getElementsByTagName('tbody')[0];
-            data.forEach(cv => {
 
-                const row = cvList.insertRow();
-                const id = row.insertCell(0);
-                const nameCell = row.insertCell(1);
-                const emailCell = row.insertCell(2);
-                const phoneCell = row.insertCell(3);
-                const downloadCell = row.insertCell(4);
-                const createAtCell = row.insertCell(5);
-                const actionsCell = row.insertCell(6);
+    function adjustColors(backgroundColor) {
 
-                nameCell.textContent = cv.name;
-                emailCell.textContent = cv.email;
+        function hexToRgb(hex) {
+            let r = 0, g = 0, b = 0;
 
-                createAtCell.textContent = cv.created_at;
-                id.textContent = cv.id;
-                phoneCell.textContent = cv.phone;
+            if (hex.length === 4) {
+                r = parseInt(hex[1] + hex[1], 16);
+                g = parseInt(hex[2] + hex[2], 16);
+                b = parseInt(hex[3] + hex[3], 16);
+            }
 
-                const downloadLink = document.createElement('a');
-                downloadLink.href = `/download/${cv.id}`;
-                downloadLink.textContent = 'Download';
-                downloadCell.appendChild(downloadLink);
+            else if (hex.length === 7) {
+                r = parseInt(hex[1] + hex[2], 16);
+                g = parseInt(hex[3] + hex[4], 16);
+                b = parseInt(hex[5] + hex[6], 16);
+            }
+            return { r, g, b };
+        }
 
-                const deleteButton = document.createElement('button');
-                deleteButton.textContent = 'Delete';
-                deleteButton.onclick = function() {
-                    if (confirm('Are you sure you want to delete this CV?')) {
-                        fetch(`/admin/delete/${cv.id}`, {
-                            method: 'DELETE',
-                        })
-                            .then(response => {
-                                if (response.ok) {
-                                    alert('File deleted successfully!');
-                                    row.remove();
-                                } else {
-                                    alert('Error deleting file.');
-                                }
-                            })
-                            .catch(error => {
-                                console.error('Error:', error);
-                            });
-                    }
-                };
-                actionsCell.appendChild(deleteButton);
 
-            });
-        })
-        .catch(error => {
-            console.error('Error fetching CVs:', error);
+        function getContrastColor(rgb) {
+            const brightness = (rgb.r * 299 + rgb.g * 587 + rgb.b * 114) / 1000;
+            return (brightness > 128) ? '#000000' : '#FFFFFF';
+        }
+
+
+        const rgb = hexToRgb(backgroundColor);
+        const contrastColor = getContrastColor(rgb);
+
+
+        document.body.style.color = contrastColor;
+        const tables = document.querySelectorAll('table');
+        tables.forEach(table => {
+            table.style.backgroundColor = contrastColor === '#FFFFFF' ? '#444444' : '#FFFFFF';
+            table.style.color = contrastColor;
         });
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+
+        const settings = JSON.parse(localStorage.getItem('adminSettings'));
+
+        if (settings) {
+
+            if (settings.pageColor) {
+                document.body.style.backgroundColor = settings.pageColor;
+                adjustColors(settings.pageColor);
+            }
+            if (settings.textSize) {
+                document.body.style.fontSize = settings.textSize === 'small' ? '12px' : settings.textSize === 'medium' ? '16px' : '20px';
+            }
+
+        }
+
+        fetch('/admin')
+            .then(response => response.json())
+            .then(data => {
+                const cvList = document.getElementById('cv-list').getElementsByTagName('tbody')[0];
+                data.forEach(cv => {
+
+                    const row = cvList.insertRow();
+                    const id = row.insertCell(0);
+                    const nameCell = row.insertCell(1);
+                    const emailCell = row.insertCell(2);
+                    const phoneCell = row.insertCell(3);
+                    const downloadCell = row.insertCell(4);
+                    const createAtCell = row.insertCell(5);
+                    const actionsCell = row.insertCell(6);
+
+                    nameCell.textContent = cv.name;
+                    emailCell.textContent = cv.email;
+
+                    createAtCell.textContent = cv.created_at;
+                    id.textContent = cv.id;
+                    phoneCell.textContent = cv.phone;
+
+                    const downloadLink = document.createElement('a');
+                    downloadLink.href = `/download/${cv.id}`;
+                    downloadLink.textContent = 'Download';
+                    downloadCell.appendChild(downloadLink);
+
+                    const deleteButton = document.createElement('button');
+                    deleteButton.textContent = 'Delete';
+                    deleteButton.onclick = function () {
+                        if (confirm('Are you sure you want to delete this CV?')) {
+                            fetch(`/admin/delete/${cv.id}`, {
+                                method: 'DELETE',
+                            })
+                                .then(response => {
+                                    if (response.ok) {
+                                        alert('File deleted successfully!');
+                                        row.remove();
+                                    } else {
+                                        alert('Error deleting file.');
+                                    }
+                                })
+                                .catch(error => {
+                                    console.error('Error:', error);
+                                });
+                        }
+                    };
+                    actionsCell.appendChild(deleteButton);
+
+                });
+            })
+            .catch(error => {
+                console.error('Error fetching CVs:', error);
+            });
+
+    });
 </script>
 </body>
 </html>
